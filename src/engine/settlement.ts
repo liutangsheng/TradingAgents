@@ -8,11 +8,18 @@
  */
 import { addDays, daysBetween, msOf } from "../contracts/index.js";
 import { MEMORY } from "../contracts/limits.js";
+import { isAShareSymbol } from "../data/akshare/symbols.js";
 
 /** Sessions observed after a decision. Stamped on each decision, so changing it reinterprets none. */
 export const OBSERVATION_SESSIONS = 5;
 /** The benchmark US decisions are compared with. */
 export const BENCHMARK = "SPY";
+/** The benchmark China A-share decisions are compared with (CSI 300). */
+export const A_SHARE_BENCHMARK = "000300.SH";
+
+export function benchmarkFor(instrument: string): string {
+  return isAShareSymbol(instrument) ? A_SHARE_BENCHMARK : BENCHMARK;
+}
 
 /**
  * One session's close; `final` when the source says it will not change. A session the source lists
@@ -71,7 +78,7 @@ export function settle(
 ): Settled | Unsettled {
   const after = msOf(decidedAt);
   const calendar = benchmark
-    .filter((bar) => closeOf(bar.date) > after)
+    .filter((bar) => closeOf(bar.date, benchmarkSymbol) > after)
     .sort((a, b) => a.date.localeCompare(b.date));
   if (calendar.length < sessions + 1) {
     return {
@@ -130,7 +137,11 @@ export function closesRange(
  * When a US session's regular trading ends, in milliseconds: 16:00 in New York, or 13:00 on the days
  * the exchange closes early (the day after Thanksgiving, July 3 and December 24, when they trade).
  */
-function closeOf(date: string): number {
+function closeOf(date: string, benchmarkSymbol: string): number {
+  if (isAShareSymbol(benchmarkSymbol)) {
+    // Shanghai/Shenzhen regular trading closes at 15:00 Asia/Shanghai (UTC+8, no DST) = 07:00 UTC.
+    return Date.parse(`${date}T07:00:00Z`);
+  }
   const winter = Date.parse(`${date}T21:00:00Z`);
   const hour = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",

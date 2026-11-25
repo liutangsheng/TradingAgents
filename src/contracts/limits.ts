@@ -15,6 +15,8 @@ export const REQUEST_MS = {
   polymarket: 10_000,
   /** Yahoo, every request including its cookie set-up and the answer's body. */
   yahoo: 30_000,
+  /** Local Python AkShare bridge, including initial market snapshot caching. */
+  akshare: 60_000,
   /** The model server's model list, asked once for the context window. */
   modelProbe: 5_000,
   /** OpenAI's sign-in endpoints. */

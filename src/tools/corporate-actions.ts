@@ -30,7 +30,7 @@ export function corporateActionsTool(actions: CorporateActions) {
   return defineTool({
     name: "corporate_actions",
     description:
-      "A US-listed security's reported splits (with their ratio) and cash distributions (amount per share, ex-date), " +
+      "A US-listed or China A-share security's reported splits (with their ratio) and cash distributions (amount per share, ex-date), " +
       "newest first: for dividend history, yield over a period, and total return. An empty list does not establish " +
       "that there were none.",
     kind: "data",

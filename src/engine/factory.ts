@@ -19,6 +19,8 @@ import {
 } from "../contracts/index.js";
 import { DEFAULT_LIMITS, type Limits, MODEL, SYNC } from "../contracts/limits.js";
 import type { Capability, DailyBars, PriceHistory } from "../data/capabilities.js";
+import { AkShareClient } from "../data/akshare/client.js";
+import { akshareProvider } from "../data/akshare/provider.js";
 import { DataError } from "../data/errors.js";
 import { PolymarketClient } from "../data/polymarket/client.js";
 import { polymarketProvider } from "../data/polymarket/provider.js";
@@ -43,6 +45,7 @@ type EngineSettings = {
   /** What a question and its agents may use; the defaults (step guards only) unless given. */
   limits?: Limits;
   tauricKey?: string;
+  akshareUrl?: string;
   version: string;
   /** The clock turns are dated by (tests fix it). */
   today?: Date;
@@ -257,12 +260,18 @@ export function createEngine(settings: EngineSettings): Engine {
   });
 }
 
-/** The providers a setup has: Tauric with a key; Yahoo and Polymarket need none. */
+/** The providers a setup has: Tauric with a key; AkShare, Yahoo and Polymarket need none. */
 export function dataProviders(
-  settings: Pick<EngineSettings, "tauricKey" | "fetch">,
+  settings: Pick<EngineSettings, "tauricKey" | "akshareUrl" | "fetch">,
   clock: Clock = () => new Date(),
 ): Providers {
   return {
+    akshare: akshareProvider(
+      new AkShareClient({
+        ...(settings.akshareUrl ? { baseURL: settings.akshareUrl } : {}),
+        ...(settings.fetch ? { fetch: settings.fetch } : {}),
+      }),
+    ),
     ...(settings.tauricKey
       ? {
           tauric: tauricProvider(

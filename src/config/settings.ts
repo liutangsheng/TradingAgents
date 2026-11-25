@@ -87,6 +87,7 @@ export type Settings = {
    */
   namedBy?: string;
   tauricKey?: string;
+  akshareUrl?: string;
   /** Whether sessions are copied to Tauric. Off unless set on; an unreadable value is off. */
   sync: boolean;
   /** Whether sync was set at all (on or off); until it is, an interactive run asks. */
@@ -157,6 +158,10 @@ export async function loadSettings(
   ) as { [P in HostedProvider]?: string };
   // Tauric's key serves its data as well as its model.
   const tauricKey = hostedKeys.tauric;
+  const rawAkshareUrl = fromEnv(ENV.akshareUrl);
+  const akshareUrlProblem = rawAkshareUrl === undefined ? undefined : checkEndpoint(rawAkshareUrl);
+  if (akshareUrlProblem) problems.push(`${ENV.akshareUrl}: ${akshareUrlProblem}`);
+  const akshareUrl = akshareUrlProblem ? undefined : rawAkshareUrl;
 
   // "provider-default" leaves it to the provider, over a level the file sets.
   const reasoningSetting = flags.reasoning ?? file.reasoning;
@@ -301,6 +306,7 @@ export async function loadSettings(
           ? { namedBy: CONFIG_FILE }
           : {}),
     ...(tauricKey ? { tauricKey } : {}),
+    ...(akshareUrl ? { akshareUrl } : {}),
     sync,
     syncAsked,
     keys,

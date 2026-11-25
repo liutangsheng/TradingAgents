@@ -47,6 +47,7 @@ export function mainPrompt({
       : []),
     "A result shows what it shows: how a price moved within a day, a cause or a trend beyond its window is an inference, and saying what an inference rests on lets the reader weigh it.",
     "When a tool fails or a source is missing, what is missing is part of the answer.",
+    "For China A-shares (such as 600519.SH, 000001.SZ, or index 000300.SH), find_instrument resolves Chinese company names and codes, AkShare serves quotes, price history, statements, profiles, estimates, corporate actions, news, and China macro series (such as cn.rates.gov_10y for China 10Y bond yield), and CSI 300 (000300.SH) is the equity benchmark.",
     "The person reads as your answer the message you write after your last tool call; text written beside a tool call shows only as progress, so recording a decision or updating the plan comes before the answer, not after it.",
     REFERENCES,
     DATA_NOT_INSTRUCTIONS,

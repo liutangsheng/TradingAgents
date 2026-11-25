@@ -36,8 +36,8 @@ export function findInstrumentTool(instruments: Instruments) {
   return defineTool({
     name: "find_instrument",
     description:
-      "Find instruments by name or code (gold, crude oil, S&P 500, euro dollar, bitcoin, CPI) and get their keys " +
-      "for quote, price_history, technicals and macro_series, with the tools that serve each. A US stock's ticker " +
+      "Find instruments by name or code (gold, crude oil, S&P 500, euro dollar, bitcoin, CPI, or Chinese A-shares/indices such as 贵州茅台, 600519, 沪深300) and get their keys " +
+      "for quote, price_history, technicals and macro_series, with the tools that serve each. A US or A-share ticker " +
       "works in those tools as it is.",
     kind: "data",
     parallelSafe: true,

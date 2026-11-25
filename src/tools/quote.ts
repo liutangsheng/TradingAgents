@@ -41,8 +41,8 @@ export function quoteTool(quotes: Quotes) {
   return defineTool({
     name: "quote",
     description:
-      "Latest quotes of up to 20 instruments at once: a US-listed security (price, day " +
-      "change, session state, 52-week range, market cap), a futures contract's front month, a currency pair, a " +
+      "Latest quotes of up to 20 instruments at once: a US-listed or China A-share security (e.g. AAPL, 600519.SH, " +
+      "000001.SZ, 000300.SH; price, day change, session state, 52-week range, market cap), a futures contract's front month, a currency pair, a " +
       "crypto pair (24-hour change) or a price series.",
     kind: "data",
     parallelSafe: true,

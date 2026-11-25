@@ -19,7 +19,8 @@
     "compile": "npm run build && bun scripts/compile.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p scripts/tsconfig.json",
     "lint": "biome check .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "akshare": "python scripts/akshare_server.py"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.8",

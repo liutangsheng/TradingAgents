@@ -62,7 +62,7 @@ export function profileTool(profiles: Profiles) {
   return defineTool({
     name: "profile",
     description:
-      "What a US-listed company is and its current key figures: sector and industry, country, market cap, valuation " +
+      "What a US-listed or China A-share company is and its current key figures: sector and industry, country, market cap, valuation " +
       "ratios, margins, growth, cash and debt, with when they were refreshed.",
     kind: "data",
     parallelSafe: true,
@@ -143,7 +143,7 @@ export function estimatesTool(profiles: Profiles) {
   return defineTool({
     name: "estimates",
     description:
-      "What analysts expect of a US-listed company: the consensus rating, price targets, the ratings' distribution and " +
+      "What analysts expect of a US-listed or China A-share company: the consensus rating, price targets, the ratings' distribution and " +
       "EPS estimates; and its calendar: the next announced earnings date with its EPS and revenue estimates (or that " +
       "none is announced yet) and the latest dividend. Each part says when its data was refreshed.",
     kind: "data",

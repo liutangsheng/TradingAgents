@@ -83,7 +83,7 @@ export function macroSeriesTool(macro: MacroSeries) {
     description:
       "A macro indicator or reference series (inflation, employment, rates, growth, money, sentiment, housing): its " +
       'latest periods, each value with when it became known. Name it ("CPI", "unemployment rate", ' +
-      '"10-year Treasury yield") or give its key from an earlier answer.',
+      '"10-year Treasury yield", "China 10-year government bond yield", "China CPI", "China PMI") or give its key from an earlier answer.',
     kind: "data",
     parallelSafe: true,
     input: z.object({

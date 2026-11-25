@@ -60,7 +60,7 @@ export const instrument = z
     "a ticker such as AAPL, or a key as find_instrument gives it (fx:EURUSD, crypto:BTC-USDT)",
   )
   .describe(
-    "A US ticker such as AAPL, or an instrument key from find_instrument: future:XNYM:CL, fx:EURUSD, crypto:BTC-USDT, series:us.equity_index.sp500",
+    "A ticker such as AAPL or 600519.SH (also XSHG:600519, 000001.SZ, 000300.SH), or an instrument key from find_instrument: future:XNYM:CL, fx:EURUSD, crypto:BTC-USDT, series:us.equity_index.sp500",
   )
   .transform((value) => {
     // A bare ticker stays a ticker; a typed key is written as answers name it.
@@ -74,7 +74,9 @@ export const symbol = z
   .trim()
   .transform((value) => value.replace(/^security:/i, ""))
   .pipe(z.string().regex(/^[A-Za-z0-9.:-]{1,32}$/, "a ticker such as AAPL, or MIC:SYMBOL"))
-  .describe("A US ticker such as AAPL, or MIC:SYMBOL such as XNAS:AAPL when a ticker is ambiguous")
+  .describe(
+    "A ticker such as AAPL or A-share 600519.SH / 000001.SZ, or MIC:SYMBOL such as XNAS:AAPL or XSHG:600519",
+  )
   .transform((value) => value.toUpperCase());
 
 /** "Apple Inc. (security:AAPL, XNAS, USD)", with the listing's state when it is no longer listed. */

@@ -56,8 +56,8 @@ export function statementsTool(statements: Statements) {
   return defineTool({
     name: "statements",
     description:
-      "One financial statement of a US-listed company from its SEC filings, newest period first, each value with the " +
-      "filing it comes from. Up to 3 periods per call; page with `after`. Every line can be referenced, such as " +
+      "One financial statement of a US-listed or China A-share company (e.g. AAPL, 600519.SH, 000001.SZ), newest period first, each value with the " +
+      "report or filing it comes from. Up to 3 periods per call; page with `after`. Every line can be referenced, such as " +
       `${referenceTo("e4", "periods[0].lines")}. For trailing twelve months, add the last four quarters with calc.`,
     kind: "data",
     parallelSafe: true,

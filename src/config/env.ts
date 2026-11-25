@@ -18,6 +18,7 @@ export const ENV = {
   model: envName("MODEL"),
   modelKey: envName("MODEL_API_KEY"),
   tauricKey: "TAURIC_API_KEY",
+  akshareUrl: envName("AKSHARE_URL"),
   sync: envName("SYNC"),
   /** Set to anything: no check for a newer release. */
   noUpdateCheck: envName("NO_UPDATE_CHECK"),

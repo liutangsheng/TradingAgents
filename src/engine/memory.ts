@@ -28,7 +28,7 @@ import { parseInstrument } from "../data/instrument-key.js";
 import { DamagedLogError, Lock, LogWriter, readLog } from "../store/index.js";
 import { defineTool, type Tool, ToolRefusalError } from "../tools/index.js";
 import {
-  BENCHMARK,
+  benchmarkFor,
   type ClosesSource,
   closesRange,
   OBSERVATION_SESSIONS,
@@ -183,7 +183,7 @@ export class Memory {
           recorded: today,
           model: this.deps.client.model,
           decidedAt: this.deps.clock().toISOString(),
-          observation: { sessions: OBSERVATION_SESSIONS, benchmark: BENCHMARK },
+          observation: { sessions: OBSERVATION_SESSIONS, benchmark: benchmarkFor(instrument) },
         };
         return {
           text: `Recorded: ${rating} on ${staged.instrument} as of ${staged.effective}, kept when your answer is complete.`,

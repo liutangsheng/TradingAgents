@@ -257,6 +257,7 @@ async function main(argv: string[]): Promise<number> {
         model,
         limits: chosen.limits,
         ...(chosen.tauricKey ? { tauricKey: chosen.tauricKey } : {}),
+        ...(chosen.akshareUrl ? { akshareUrl: chosen.akshareUrl } : {}),
         version: VERSION,
         contextWindow: context.window,
         modelLimits: {
