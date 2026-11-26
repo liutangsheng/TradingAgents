@@ -186,13 +186,14 @@ export async function openChat(wiring: ChatWiring): Promise<OpenChat> {
     </ThemeContext.Provider>,
     // Only the rows that changed are redrawn as an answer streams.
     // Shift+Enter is told apart from Enter where the terminal speaks the kitty keyboard protocol.
+    // Disable kitty protocol on Windows where VS Code (xterm.js) and Windows Terminal can drop IME commits.
     {
       // Only ever at a terminal: drawn as it changes, also where CI is set.
       interactive: true,
       exitOnCtrlC: false,
       patchConsole: false,
       incrementalRendering: true,
-      kittyKeyboard: { mode: "auto" },
+      kittyKeyboard: { mode: process.platform === "win32" ? "disabled" : "auto" },
     },
   );
   return { exited: app.waitUntilExit().then(() => controls.settled), kept };

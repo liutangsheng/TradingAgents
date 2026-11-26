@@ -96,6 +96,7 @@ export function stepsUI(
           interactive: true,
           exitOnCtrlC: false,
           patchConsole: false,
+          kittyKeyboard: { mode: process.platform === "win32" ? "disabled" : "auto" },
           ...(io.stdin ? { stdin: io.stdin } : {}),
           stdout,
         },
